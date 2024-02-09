@@ -2,6 +2,8 @@ import os
 import json
 from dotenv import load_dotenv
 from kafka import KafkaConsumer, KafkaProducer
+import re
+
 
 load_dotenv()
 
