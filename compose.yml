@@ -12,7 +12,7 @@ services:
       - TZ=America/Detroit
       - RELEASE_VERSION=${RELEASE_VERSION}
       - SOURCE_TOPIC_NAME=${SOURCE_TOPIC_NAME}
-      - SOURCE_TOPIC_NAME=${SOURCE_TOPIC_NAME}
+      - DESTINATION_TOPIC_NAME=${DESTINATION_TOPIC_NAME}
       - GROUP_ID=${GROUP_ID}
       - BROKER=${BROKER}
     networks:
@@ -23,8 +23,7 @@ services:
       pip3 install pytz --break-system-packages;
       pip3 install kafka-python --break-system-packages;
       pip3 install python-dotenv --break-system-packages;
-      pip3 install python-telegram-bot --no-cache-dir --break-system-packages;
-      
+
       if [ ! -d /data/whisper-text-training-set-producer-v${RELEASE_VERSION} ]; then
         mkdir -p /data/whisper-text-training-set-producer-v${RELEASE_VERSION} && \
         curl -L https://github.com/DevinMB/whisper-text-training-set-producer/archive/refs/tags/v${RELEASE_VERSION}.tar.gz | tar xz --strip-components=1 -C /data/whisper-text-training-set-producer-v${RELEASE_VERSION};
