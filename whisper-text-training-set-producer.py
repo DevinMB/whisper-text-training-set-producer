@@ -23,14 +23,23 @@ producer = KafkaProducer(
     value_serializer=lambda m: json.dumps(m).encode('utf-8')  
 )
 
+def preprocess_text(text):
+    # Convert to lowercase
+    text = text.lower()
+    # Remove punctuation
+    text = re.sub(r'[^\w\s]', '', text)
+    return text
+
 for message in consumer:
     msg_data = message.value
 
     if msg_data.get('chat_id') == -1001888622530:
 
+        processed_message = preprocess_text(msg_data.get('message', ''))
+
         new_message = {
             "title": msg_data.get('title'),
-            "message": msg_data.get('message')
+            "message": processed_message
         }
 
         producer.send(destination_topic, new_message)
