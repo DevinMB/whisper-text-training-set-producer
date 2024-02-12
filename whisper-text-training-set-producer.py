@@ -39,6 +39,11 @@ for message in consumer:
 
         processed_message = preprocess_text(msg_data.get('message', ''))
 
+        # Remove links
+        if processed_message.startswith('http'):
+            print("Skipping message as it starts with 'http'")
+            continue
+
         new_message = {
             "title": msg_data.get('title'),
             "message": processed_message
