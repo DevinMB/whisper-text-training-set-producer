@@ -3,6 +3,7 @@ version: '3.8'
 services:
   alpine-python:
     image: alpine:latest
+    restart: always
     command: tail -f /dev/null
     volumes:
       - whisper_text_training_producer:/data  
